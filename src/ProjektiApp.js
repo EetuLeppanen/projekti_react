@@ -1,10 +1,10 @@
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {red, blue, green, yellow, lightBlue, amber, pink } from '@material-ui/core/colors/';
+import { blue, green,} from '@material-ui/core/colors/';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import KyselyFetchApp from './KyselyFetchApp';
-import { Menu } from '@material-ui/core';
+
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
 
@@ -30,6 +30,8 @@ const theme = createMuiTheme({
         MuiCssBaseline: {
             "@global": {
                 body : {
+                    paddingLeft: "50px",
+                    paddingRight: "50px",
                     backgroundImage:
                     "url(https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg)"
                 }

@@ -7,18 +7,20 @@ import FormLabel from '@material-ui/core/FormLabel';
 import KyselyFetchApp from '../KyselyFetchApp';
 
 function KyselyFetch() {
-  const [value, setValue] = React.useState('female');
+  const [value, setValue] = React.useState('Kyllä');
   const [questions, setQuestions] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
-
+  
+  
   const fetchUrl = async () => {
 
   try {
-    let url = 'https://ohjelmistoprojekti1backend.herokuapp.com/questions';
-    const response = await fetch(url);
+    let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/getquestions/'
+    const response = await fetch(proxyUrl + targetUrl);
     const json = await response.json();
-    setQuestions(json._embedded.questions);
-    console.log(json._embedded.questions)
+    setQuestions(json.questions);
+    console.log(json.title);
    
 
 } catch (error) {
@@ -43,9 +45,21 @@ useEffect( () => { fetchUrl(); }, [])
     <FormControl component="fieldset">
       <FormLabel component="legend">Onko Arskalla hieno auto?</FormLabel>
       <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-        <FormControlLabel value="female" control={<Radio />} label="Kyllä" />
-        <FormControlLabel value="male" control={<Radio />} label="Ei" />
-        <FormControlLabel value="other" control={<Radio />} label="En osaa sanoa" />
+      {questions.map(question => (
+          <FormControlLabel
+            value={question.title}
+            control={<Radio />}
+            label={question.title}
+            key={question.questionid}
+          />
+          
+        ))}
+        <FormControlLabel value="Kyllä" control={<Radio />} label="Kyllä" />
+        <FormControlLabel value="Ei" control={<Radio />} label="Ei" />
+        <FormControlLabel value="EOS" control={<Radio />} label="En osaa sanoa" />
+        
+      
+        
 
       </RadioGroup>
     </FormControl>

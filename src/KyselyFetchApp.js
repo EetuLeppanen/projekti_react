@@ -1,6 +1,6 @@
 
 import React from 'react';
-import KyselyFetch from './components/KyselyFetch';
+import KyselyFetch from './KyselyFetch';
 
 function KyselyFetchApp() {
     return(
