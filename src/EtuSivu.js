@@ -1,5 +1,5 @@
 import React from 'react';
-
+import OpenQuestion from './OpenQuestion';
 
 
 
@@ -7,7 +7,9 @@ import React from 'react';
 
 function EtuSivu (){
     return(
-        <div>Tervetuloa</div>
+        <div> krikin kajapöhö
+            
+        </div>
         )
 }
 export default EtuSivu;

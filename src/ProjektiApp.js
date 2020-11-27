@@ -3,10 +3,11 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue, green,} from '@material-ui/core/colors/';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import KyselyFetchApp from './KyselyFetchApp';
 
+import QuestionSelect from './QuestionSelect';
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
+import FetchQuestions from './FetchQuestions';
 
 
 
@@ -49,7 +50,8 @@ function ProjektiApp () {
             <MenuMUI/>
             <Switch>
                 <Route exact path='/' component={ EtuSivu} />
-                <Route path='/kysymys' component= { KyselyFetchApp } />
+                <Route path='/kysymys' component= { QuestionSelect } />
+                <Route path='/kysymykset' component= { FetchQuestions } />
             </Switch>
 
             

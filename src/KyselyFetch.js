@@ -4,7 +4,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import KyselyFetchApp from '../KyselyFetchApp';
+import KyselyFetchApp from './KyselyFetchApp';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
@@ -15,19 +15,19 @@ function KyselyFetch() {
   const [error, setError] = React.useState(false);
   const [kylla, setKylla] = useState('Haetaan');
   const [ei, setEi] = useState('Haetaan');
-
+  const [vast, setVast] = useState([]);
 
   const fetchUrl = async () => {
 
   try {
     let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/getquestions/'
+    let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/questions/';
     const response = await fetch(proxyUrl + targetUrl);
     const json = await response.json();
     setQuestions(json);
     
    
-    setKylla(json.options[0].option)
+    setKylla(json.options[0].value)
     console.log(ei);
 } catch (error) {
     setTeksti('Haku ei onnistunut');
@@ -35,43 +35,60 @@ function KyselyFetch() {
 
 useEffect( () => { fetchUrl(); }, [])
 
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-
+const handleRadioChange = (event) => {
+  setValue({...value, vast: event.target.value });
+ 
 };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(value);
   };
 
   return (  <Grid container spacing={2}
     direction="column"
     justify="center"
     alignItems="flex-start">
-      
+    
       {
       questions.map(question => { 
   return(
-    <form onSubmit={handleSubmit}>
+    
+    <form key={ question.options.questionId } onSubmit={handleSubmit}>
         <FormControl component="fieldset">
         <FormLabel component="legend">{question.title}</FormLabel>
-        <RadioGroup aria-label={question.title} name={question.title} value={value} onChange={handleRadioChange}>
+        <RadioGroup aria-label="kysely" name="kys1" value={vast} onChange={handleRadioChange}>
         <FormControlLabel
-              value="kys1"
+        key={ question.options[0].optionId }
+              value={question.options[0].value} 
               control={<Radio />}
-              label={question.options[0].option}           
+              label={question.options[0].value}      
             />
         <FormControlLabel
-              value="kys2"
+         key={ question.options[1].optionId }
+              value={question.options[1].value}
               control={<Radio />}
-              label={question.options[1].option}          
+              label={question.options[1].value}
+      
+            />
+            <FormControlLabel
+             key={ question.options[2].optionId }
+              value={question.options[2].value}
+              control={<Radio />}
+              label={question.options[2].value}
+      
             />
         </RadioGroup>
       </FormControl> 
+      <Button type="submit" variant="outlined" color="primary"> submit</Button>
       </form>
+      
+      
           );  
         })
       }
-       <Button type="submit" variant="outlined" color="primary"> submit</Button>
+    
+       
  </Grid>
   );
 
