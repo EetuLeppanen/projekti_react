@@ -3,17 +3,14 @@ import RadioQuestion from './RadioQuestion';
 import OpenQuestion from './OpenQuestion';
 import Button from '@material-ui/core/Button';
 import SliderQuestion from './SliderQuestion';
+import CheckboxQuestion from './CheckboxQuestion';
 
 export default function FetchQuestions(props){
 
   const [survey, setSurvey] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
-  const [error, setError] = React.useState(false);
-  const [vast, setVast] = useState([]);
-  const [vasta, setVasta] = useState('1');
   const [value, setValue] = useState('');
-  const [reitti, setReitti] = useState([]);
-  const [valinta, setValinta] = useState('');
+  
 
   function handleChange(newValue) {
     setValue(newValue);
@@ -47,7 +44,9 @@ useEffect( () => { fetchUrl(); }, [])
       <br></br>
       <RadioQuestion survey= {survey} value={value} onChange={handleChange}/> 
       <br></br>
-        <SliderQuestion question = {survey[0]}/>
+        <SliderQuestion squestion = {survey[0]}/>
+        <br></br>
+        <CheckboxQuestion cquestion = {survey[0]}/>
     </div>
         <Button type="submit" variant="outlined" color="primary"> submit</Button>
   </form>

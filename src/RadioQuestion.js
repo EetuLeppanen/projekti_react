@@ -1,23 +1,15 @@
-import React, { useState, useEffect, } from 'react';
+import React, {} from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import FetchQuestions from './FetchQuestions';
+
 
 export default function RadioQuestion(props) {
 
-  const [value, setValue] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [teksti, setTeksti] = useState('Haetaan');
-  const [error, setError] = React.useState(false);
-  const [kylla, setKylla] = useState('Haetaan');
-  const [ei, setEi] = useState('Haetaan');
-  const [vast, setVast] = useState([]);
-
+ 
   function handleChange(event) {
     props.onChange(event.target.value);
     
