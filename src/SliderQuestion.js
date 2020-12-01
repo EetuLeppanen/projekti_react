@@ -38,6 +38,7 @@ const marks = [
 
 function valuetext(value) {
   return `${value}`;
+  console.log(value);
 }
 
 

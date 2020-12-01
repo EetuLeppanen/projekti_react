@@ -2,13 +2,13 @@ import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SliderQuestion from './SliderQuestion';
+import ProjektiApp from './ProjektiApp';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <MuiThemeProvider>
   <React.StrictMode>
-    <SliderQuestion />
+    <ProjektiApp />
   </React.StrictMode>
   </MuiThemeProvider>,
   document.getElementById('root')
