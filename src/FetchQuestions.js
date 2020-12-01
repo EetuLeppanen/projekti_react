@@ -6,7 +6,7 @@ import SliderQuestion from './SliderQuestion';
 
 export default function FetchQuestions(props){
 
-  const [questions, setQuestions] = useState([]);
+  const [survey, setSurvey] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
   const [error, setError] = React.useState(false);
   const [vast, setVast] = useState([]);
@@ -20,12 +20,8 @@ export default function FetchQuestions(props){
     console.log(value);
   }
 
-  
- 
   const fetchUrl = async () => {
-
-    try {
-      
+    try { 
       let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
       let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/1/questions/'; 
       const response = await fetch(proxyUrl + targetUrl);
@@ -40,14 +36,10 @@ export default function FetchQuestions(props){
     const handleSubmit = (event) => {
       event.preventDefault();
       console.log(value);
-     
+    
 };
 
-
 useEffect( () => { fetchUrl(); }, [])
-
-
-
 
     return (
   <form  onSubmit={handleSubmit}>
