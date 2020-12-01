@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-joonas kirvesmäki!!!!!!!!!!
+haistakaa niin ,, jotka hauukkuu jannen videoita
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
