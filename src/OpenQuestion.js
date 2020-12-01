@@ -17,7 +17,7 @@ function OpenQuestion() {
   return (
     <form className={classes.root} noValidate autoComplete="off">
  
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField id="outlined-basic" label="Kysymys" variant="outlined" />
     </form>
   );
 }

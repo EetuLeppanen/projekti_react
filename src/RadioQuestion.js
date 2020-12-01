@@ -6,9 +6,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
+import FetchQuestions from './FetchQuestions';
 
 export default function RadioQuestion(props) {
+
   const [value, setValue] = useState('');
   const [questions, setQuestions] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
@@ -17,17 +18,10 @@ export default function RadioQuestion(props) {
   const [ei, setEi] = useState('Haetaan');
   const [vast, setVast] = useState([]);
 
-    const handleRadioChange = (event) => {
-        setValue({...value, vast: event.target.value });
-        console.log(value);
-        
-      };
-
-      const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(value);
-      };
-
+  function handleChange(event) {
+    props.onChange(event.target.value);
+    
+}
 
 return( <Grid container spacing={2}
     direction="column"
@@ -38,10 +32,9 @@ return( <Grid container spacing={2}
       props.questions.map(question => { 
   return(
     
-    <form key={ question.options.questionId } onSubmit={handleSubmit}>
         <FormControl component="fieldset">
         <FormLabel component="legend">{question.title}</FormLabel>
-        <RadioGroup aria-label="kysely" name="kys1" value={vast} onChange={handleRadioChange}>
+        <RadioGroup aria-label="kysely" name="kys1" value={props.value} onChange={handleChange}>
         <FormControlLabel
         key={ question.options[0].optionId }
               value={question.options[0].value} 
@@ -60,19 +53,13 @@ return( <Grid container spacing={2}
               value={question.options[2].value}
               control={<Radio />}
               label={question.options[2].value}
-      
+              
             />
         </RadioGroup>
-      </FormControl> 
-      <Button type="submit" variant="outlined" color="primary"> submit</Button>
-      </form>
-      
+      </FormControl>      
       
           );  
         })
-      }
-    
-       
+      }          
  </Grid>
-
 )}

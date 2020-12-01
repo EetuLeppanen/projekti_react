@@ -16,6 +16,10 @@ const surveys = [
     value: 1,
     label: 'Ensimmäinen kysely',
   },
+  {
+    value: 2,
+    label: 'Toinen kysely',
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -30,8 +34,8 @@ const classes = useStyles();
   
     const handleChange = (event) => {
     setValinta(event.target.value );
-    console.log(surveys);
-    <FetchQuestions valinta = {valinta}/>
+    console.log(valinta);
+   
   };
   
 
