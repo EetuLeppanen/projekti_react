@@ -30,7 +30,7 @@ export default function CheckboxesGroup(props) {
   };
 
   const { eetu, kimi, vesku } = state;
-  
+  const error = [ eetu, kimi, vesku ].filter((v) => v).length !== 2;
 
   return (
     <div className={classes.root}>
