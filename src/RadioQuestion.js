@@ -29,7 +29,7 @@ return( <Grid container spacing={2}
     alignItems="flex-start">
     
       {
-      props.questions.map(question => { 
+      props.survey.map(question => { 
   return(
     
         <FormControl component="fieldset">
