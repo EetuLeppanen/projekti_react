@@ -47,7 +47,7 @@ useEffect( () => { fetchUrl(); }, [])
       <br></br>
       <RadioQuestion survey= {survey} value={value} onChange={handleChange}/> 
       <br></br>
-        <SliderQuestion question = {questions[0]}/>
+        <SliderQuestion question = {survey[0]}/>
     </div>
         <Button type="submit" variant="outlined" color="primary"> submit</Button>
   </form>
