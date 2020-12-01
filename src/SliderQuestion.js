@@ -47,7 +47,7 @@ function SliderQuestion(props) {
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-custom" gutterBottom>
-        {props.question.title}
+        joonaksen auto hienous lvl
       </Typography>
       <Slider
         defaultValue={50}
