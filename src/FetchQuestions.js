@@ -9,8 +9,10 @@ export default function FetchQuestions(props){
 
   const [survey, setSurvey] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
+  const [error, setError] = React.useState(false);
+
   const [value, setValue] = useState('');
-  
+
 
   function handleChange(newValue) {
     setValue(newValue);
@@ -30,11 +32,22 @@ export default function FetchQuestions(props){
       setTeksti('Haku ei onnistunut');
 }}
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      console.log(value);
+    const handleSubmit = (value) => {
+
+      fetch('https://cors-anywhere.herokuapp.com/https://ohjelmistoprojekti1backend.herokuapp.com/answers', 
+      {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(value)
+        })
+        .then(res => fetchUrl())
+        .catch(err => console.error(err))
+        console.log(value)
+}
     
-};
+
 
 useEffect( () => { fetchUrl(); }, [])
 
@@ -44,9 +57,7 @@ useEffect( () => { fetchUrl(); }, [])
       <br></br>
       <RadioQuestion survey= {survey} value={value} onChange={handleChange}/> 
       <br></br>
-        <SliderQuestion squestion = {survey[0]}/>
-        <br></br>
-        <CheckboxQuestion cquestion = {survey[0]}/>
+       
     </div>
         <Button type="submit" variant="outlined" color="primary"> submit</Button>
   </form>
