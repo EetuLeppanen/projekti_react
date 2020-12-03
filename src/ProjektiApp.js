@@ -8,7 +8,7 @@ import QuestionSelect from './QuestionSelect';
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
 import FetchQuestions from './FetchQuestions';
-
+import Survey from './Survey';
 
 
 
@@ -51,7 +51,7 @@ function ProjektiApp () {
             <Switch>
                 <Route exact path='/' component={ EtuSivu} />
                 <Route path='/kysymys' component= { QuestionSelect } />
-                <Route path='/kysymykset' component= { FetchQuestions } />
+                <Route path='/kysymykset' component= { Survey } />
             </Switch>
 
             

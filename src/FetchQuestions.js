@@ -4,7 +4,7 @@ import OpenQuestion from './OpenQuestion';
 import Button from '@material-ui/core/Button';
 import SliderQuestion from './SliderQuestion';
 import CheckboxQuestion from './CheckboxQuestion';
-
+import FormControl from '@material-ui/core/FormControl';
 export default function FetchQuestions(props){
 
   const [survey, setSurvey] = useState([]);
@@ -14,7 +14,7 @@ export default function FetchQuestions(props){
   const [value, setValue] = useState('');
 
 
-  function handleChange(newValue) {
+  function handleValueChange(newValue) {
     setValue(newValue);
     console.log(value);
   }
@@ -52,13 +52,13 @@ export default function FetchQuestions(props){
 useEffect( () => { fetchUrl(); }, [])
 
     return (
-  <form  onSubmit={handleSubmit}>
-    <div>
-      <br></br>
-      <RadioQuestion survey= {survey} value={value} onChange={handleChange}/> 
-      <br></br>
-       
-    </div>
-        <Button type="submit" variant="outlined" color="primary"> submit</Button>
-  </form>
+      <FormControl>
+
+      {survey.questions.map((question, index) =>
+      <RadioQuestion key={index} question={question} value={value} handleValueChange={handleValueChange}/>
+      )}
+      <Button onClick={() => handleSubmit()}>
+          submit
+      </Button>
+  </FormControl>
   )}
