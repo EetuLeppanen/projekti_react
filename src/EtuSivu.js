@@ -1,5 +1,6 @@
 import React from 'react';
 import OpenQuestion from './OpenQuestion';
+import Survey from './Survey.js';
 
 
 
@@ -7,9 +8,8 @@ import OpenQuestion from './OpenQuestion';
 
 function EtuSivu (){
     return(
-        <div> krikin kajapöhö
-            
-        </div>
+            <Survey />
+
         )
 }
 export default EtuSivu;
