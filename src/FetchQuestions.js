@@ -34,7 +34,7 @@ export default function FetchQuestions(props){
 
     const handleSubmit = (value) => {
 
-      fetch('https://cors-anywhere.herokuapp.com/https://ohjelmistoprojekti1backend.herokuapp.com/answers', 
+      fetch('https://cors-anywhere.herokuapp.com/https://ohjelmistoprojekti1backend.herokuapp.com/api/answers',
       {
         method: 'POST',
         headers: {
