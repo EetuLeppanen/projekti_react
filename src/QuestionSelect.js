@@ -62,7 +62,7 @@ return(
 
         </TextField>
         <Grid item>
-        <Button  component={ Link } to='/Kysymykset'>Valitse</Button>
+        <Button  component={ Link } to={'/Kysymykset' + '/' + valinta }>Valitse</Button>
         </Grid>
         
         

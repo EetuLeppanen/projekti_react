@@ -51,7 +51,7 @@ function ProjektiApp () {
             <Switch>
                 <Route exact path='/' component={ EtuSivu} />
                 <Route path='/kysymys' component= { QuestionSelect } />
-                <Route path='/kysymykset' component= { Survey } />
+                <Route path='/kysymykset/:valinta' component= { Survey } />
             </Switch>
 
             
