@@ -7,7 +7,8 @@ import OpenQuestion from './OpenQuestion';
 
 function EtuSivu (){
     return(
-        <div> krikin kajapöhö
+        <div>
+            <h1>KyselyApp</h1>
             
         </div>
         )
