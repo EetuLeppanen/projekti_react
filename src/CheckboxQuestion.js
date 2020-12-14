@@ -1,15 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Checkbox from '@material-ui/core/Checkbox';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   formControl: {
     margin: theme.spacing(3),
@@ -17,43 +17,49 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CheckboxesGroup(props) {
+
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    eetu: true,
-    kimi: false,
-    vesku: false,
-  });
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-    console.log(state);
-  };
+  const [state, setState] = React.useState([]);
 
-  const { eetu, kimi, vesku } = state;
-  const error = [ eetu, kimi, vesku ].filter((v) => v).length !== 2;
+
+  const upDateList = (e) => {
+    if(e.target.checked === true) {
+      var list = state.filter(item => item.value !== e.target.value);
+    var ans = {questionId: props.question.questionid, value: e.target.value};
+    list.push(ans);
+    setState(list);
+    props.checkboxOnValueChange(props.question.questionid, list);
+    } else {
+      var list = state.filter(item => item.value !== e.target.value);
+    setState(list);
+    props.checkboxOnValueChange(props.question.questionid, list);
+    }
+
+  }
+ 
 
   return (
     <div className={classes.root}>
-      <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">isoin str lvl?</FormLabel>
+      <FormControl
+        component="fieldset"
+        className={classes.formControl}
+      >
         <FormGroup>
-          <FormControlLabel
-            control={<Checkbox checked={eetu} onChange={handleChange} name="eetu" />}
-            label="eetu leppänen"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={kimi} onChange={handleChange} name="kimi" />}
-            label="kimi korpela"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={vesku} onChange={handleChange} name="vesku" />}
-            label="vesku loiri"
-          />
+          <FormLabel component="legend">{props.question.title}</FormLabel>
+          {props.question.options.map((option, index) => (
+            <FormControlLabel
+              key={index}
+              value={option.value}
+              questionid={props.question.questionid}
+              control={<Checkbox />}
+              onChange={upDateList}
+              label={option.value}
+              name={option.value}
+            />
+          ))}
         </FormGroup>
-        <FormHelperText>vinkki: alkaa e</FormHelperText>
       </FormControl>
-     
-      
     </div>
   );
 }
