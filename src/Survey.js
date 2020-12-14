@@ -5,11 +5,24 @@ import OpenQuestion from './OpenQuestion.js';
 import CheckBoxQuestion from './CheckboxQuestion.js';
 import SliderQuestion from './SliderQuestion.js';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 import {
     useParams
   } from "react-router-dom";
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: '10px',
+        paddingBottom: '15px',
+        width: '25ch',
+      },
+    },
+  }));
+
 function Survey () {
+    const classes = useStyles();
 
     let {id} = useParams();
     
@@ -36,9 +49,7 @@ function Survey () {
       };
 
         
-        const checkAnswers = () => {
-            console.log(vastauslista);
-        }
+        
 
         const onValueChange = (event) => {
         var list = vastauslista.filter(item => item.questionId !== parseInt(event.target.id));
@@ -68,15 +79,7 @@ function Survey () {
     }
     
     
-    const checkasd =(event) => {
-        console.log(vastauslista);
-        
-      }
-
-      const asdf = () => {
-          console.log(survey);
-      }
-
+   
       const sendAnswersToBackend = (event) => {
           event.preventDefault();
           var answeredsurvey = {surveyId: survey.surveyId, answers: vastauslista}
@@ -102,9 +105,9 @@ function Survey () {
         return(
             <div>
                
-               <div>Otsikko: {survey.title}</div><br/>
-               <div>Kyselyn ID: {id}</div><br/>
-            <form onSubmit={sendAnswersToBackend}>
+               <div><h1> {survey.title}</h1></div>
+               <div><b>Kyselyn tunnus: {id}</b></div><br/>
+            <form className={classes.root} onSubmit={sendAnswersToBackend}>
                 {survey.questions.map((question, index) => {
                 
                 if(question.questiontype === "RADIO"){
@@ -113,11 +116,11 @@ function Survey () {
 
                 } else if(question.questiontype === "OPENTEXT") {
                     
-                    return <OpenQuestion key={index} index={index} question={question} onValueChange={onValueChange} handleValueChange={handleValueChange}/>
+                    return <OpenQuestion key={index} index={index}  question={question} onValueChange={onValueChange} handleValueChange={handleValueChange}/>
 
                 } else if(question.questiontype === "CHECKBOX") {
                     
-                    return <CheckBoxQuestion key={index} index={index} question={question} checkboxOnValueChange={checkboxOnValueChange}/>
+                    return <CheckBoxQuestion key={index}  index={index} question={question} checkboxOnValueChange={checkboxOnValueChange}/>
 
                 } else if(question.questiontype === "SCALE") {
                     return <SliderQuestion key={index} index={index} question={question} sliderOnValueChange={sliderOnValueChange}/>
@@ -129,7 +132,7 @@ function Survey () {
                 
                 
                 })}
-                <Button type="submit">
+                <Button variant="contained" color="secondary" type="submit">
                     submit
                 </Button>
             </form>
