@@ -8,19 +8,37 @@ import QuestionSelect from './QuestionSelect';
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
 import FetchQuestions from './FetchQuestions';
+
 import SurveyForm from './SurveyForm';
 import PickSurvey from './PickSurvey';
+
+
 import Survey from './Survey';
 
 
 
 const theme = createMuiTheme({
     palette: {
-        primary:{main: '#000001', contrastText: '#FFFFFF'},
-        secondary: {main: '#f4d4f4', contrastText: '#FFFFFF'},
-        text: {primary: '#000000', secondary: blue[900], contrastText: '#FFFFFF' },
-        action: {active: blue[300], hover: '#1a233e', selected: green[300] },
-        background: { default: '#000000',
+        primary:{
+            main: '#000001', 
+            contrastText: '#FFFFFF'},
+
+        secondary: {
+            main: '#f4d4f4', 
+            contrastText: '#FFFFFF'},
+
+        text: {
+            primary: '#000000', 
+            secondary: blue[900], 
+            contrastText: '#FFFFFF' },
+
+        action: {
+            active: blue[300], 
+            hover: '#1a233e', 
+            selected: green[300] },
+
+        background: { 
+            default: '#000000',
         },
         },
     typography: 
@@ -53,10 +71,14 @@ function ProjektiApp () {
             <Switch>
                 <Route exact path='/' component={ EtuSivu} />
                 <Route path='/kysymys' component= { QuestionSelect } />
+
                 <Route path='/kysymykset' component= { FetchQuestions } />
                 <Route path='/lisaakysely' component= {SurveyForm } />
                 <Route path='/valitsekysely' component= {PickSurvey } />
                 <Route path="/surveys/:id" component= {Survey } />
+
+
+
             </Switch>
 
             

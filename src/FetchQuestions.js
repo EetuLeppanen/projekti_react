@@ -4,25 +4,26 @@ import OpenQuestion from './OpenQuestion';
 import Button from '@material-ui/core/Button';
 import SliderQuestion from './SliderQuestion';
 import CheckboxQuestion from './CheckboxQuestion';
-
+import FormControl from '@material-ui/core/FormControl';
+import { useParams } from 'react-router';
 export default function FetchQuestions(props){
 
   const [survey, setSurvey] = useState([]);
   const [teksti, setTeksti] = useState('Haetaan');
   const [error, setError] = React.useState(false);
-
   const [value, setValue] = useState('');
+  let { valinta } = useParams();
 
-
-  function handleChange(newValue) {
+  function handleValueChange(newValue) {
     setValue(newValue);
     console.log(value);
+    
   }
 
   const fetchUrl = async () => {
     try { 
       let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-      let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/1/questions/'; 
+      let targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/' + valinta + '/questions/'; 
       const response = await fetch(proxyUrl + targetUrl);
       const json = await response.json();
      setSurvey(json);
@@ -34,7 +35,7 @@ export default function FetchQuestions(props){
 
     const handleSubmit = (value) => {
 
-      fetch('https://cors-anywhere.herokuapp.com/https://ohjelmistoprojekti1backend.herokuapp.com/answers', 
+      fetch('https://cors-anywhere.herokuapp.com/https://ohjelmistoprojekti1backend.herokuapp.com/api/answers',
       {
         method: 'POST',
         headers: {
@@ -45,6 +46,7 @@ export default function FetchQuestions(props){
         .then(res => fetchUrl())
         .catch(err => console.error(err))
         console.log(value)
+        console.log(valinta);
 }
     
 
@@ -52,13 +54,13 @@ export default function FetchQuestions(props){
 useEffect( () => { fetchUrl(); }, [])
 
     return (
-  <form  onSubmit={handleSubmit}>
-    <div>
-      <br></br>
-      <RadioQuestion survey= {survey} value={value} onChange={handleChange}/> 
-      <br></br>
-       
-    </div>
-        <Button type="submit" variant="outlined" color="primary"> submit</Button>
-  </form>
+      <FormControl>
+
+      {survey.questions.map((question, index) =>
+      <RadioQuestion key={index} question={question} value={value} handleValueChange={handleValueChange}/>
+      )}
+      <Button onClick={() => handleSubmit()}>
+          submit
+      </Button>
+  </FormControl>
   )}

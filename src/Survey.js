@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import RadioQuestion from './RadioQuestion.js';
+
 import OpenQuestion from './OpenQuestion.js';
 import CheckBoxQuestion from './CheckboxQuestion.js';
 import SliderQuestion from './SliderQuestion.js';
@@ -25,12 +26,14 @@ function Survey () {
     const localUrlToSendAnswers = 'http://localhost:8080/anssurs';
     const urlToSendAnswers = 'https://ohjelmistoprojekti1backend.herokuapp.com/anssurs';
     
+
     useEffect(() => {
         fetch(proxyUrl + targetUrl)
         .then(response => response.json())
         .then(data => setSurvey(data))
         .catch(error => console.error(error))
     }, []);
+
 
     const handleValueChange =  (index, answer) => {
         vastauslista[index] = answer;
@@ -138,6 +141,7 @@ function Survey () {
                 </Button>
             </form>
             </div>
+
 )
       } else
         return(
