@@ -13,6 +13,14 @@ import SliderQuestion from './SliderQuestion.js';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import {useParams} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,18 +40,36 @@ import {useParams} from "react-router-dom";
   });
 
 
-function Survey () {
+export default function Survey () {
     const [open, setOpen] = React.useState(false);
+    const [snackopen, setSnackopen] = React.useState(false);
+    const [disable, setDisable] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
+        setDisable(true);
       };
     
       const handleClose = () => {
         setOpen(false);
       };
 
-      
+      const handleCloseDisable = () => {
+          setDisable(false);
+      };
+
+      const handleClick = () => {
+        setSnackopen(true);
+      };
+
+      const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setSnackopen(false);
+  };
+
     const classes = useStyles();
 
     let {id} = useParams();
@@ -154,7 +180,7 @@ function Survey () {
                 
                 
                 })}
-               <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+               <Button variant="contained" color="secondary" onClick={handleClickOpen} disabled={disable}>
         Lähetä
       </Button>
       <Dialog
@@ -172,14 +198,23 @@ function Survey () {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={() => { handleClose(); handleCloseDisable(); }} color="primary">
             Peruuta
           </Button>
-          <Button onClick={() => { handleClose(); sendAnswersToBackend();}} type="submit" color="secondary" > 
+          <Button onClick={() => { handleClick(); handleClose(); sendAnswersToBackend();}} type="submit" color="secondary"  > 
            Hyväksy
+           
           </Button>
+          
         </DialogActions>
       </Dialog>
+      <Snackbar open={snackopen} autoHideDuration={10000} onClose={handleCloseSnack}>
+      
+        <Alert onClose={handleCloseSnack} severity="success">
+          Kiitos vastauksesta!
+          <Button variant="outlined" component={ Link } to='/valitsekysely'> Palaa kyselylistaan</Button>
+        </Alert>
+      </Snackbar>
             </form>
             </div>
 
@@ -190,4 +225,3 @@ function Survey () {
          )
 }
 
-export default Survey;

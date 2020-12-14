@@ -24,7 +24,7 @@ function MenuMUI () {
     <AppBar position='static'>
       <Toolbar>
          <IconButton onClick={ handleMenu } color='inherit'><MenuIcon /></IconButton>
-         <Typography variant='h5' style={ {flexGrow: 1, textAlign: 'center'} }>Projekti</Typography>
+         <Typography variant='h5' style={ {flexGrow: 1, textAlign: 'center'} }>Kyselysovellus</Typography>
       </Toolbar>
     </AppBar>
 

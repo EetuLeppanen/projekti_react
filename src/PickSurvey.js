@@ -39,7 +39,7 @@ export default function PickSurvey() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Kyselyn nimi</TableCell>
+                <TableCell><b>Kyselyn nimi</b></TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
