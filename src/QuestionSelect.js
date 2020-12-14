@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -62,7 +62,7 @@ return(
 
         </TextField>
         <Grid item>
-        <Button  component={ Link } to={'/Kysymykset' + '/' + valinta }>Valitse</Button>
+        <Button color="primary" component={ Link } to={'/Kysymykset' + '/' + valinta }>Valitse</Button>
         </Grid>
         
         

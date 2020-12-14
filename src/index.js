@@ -1,8 +1,7 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, } from '@material-ui/core/styles';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CheckboxQuestion from './CheckboxQuestion';
 import reportWebVitals from './reportWebVitals';
 import ProjektiApp from './ProjektiApp';
 

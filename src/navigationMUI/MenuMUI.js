@@ -10,9 +10,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
-import CreateIcon from '@material-ui/icons/Create';
-import ListIcon from '@material-ui/icons/List';
 import { Link } from 'react-router-dom';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 function MenuMUI () {
   const [anchorMenu, setMenuOpen] = useState(null);
@@ -41,16 +40,8 @@ function MenuMUI () {
           <ListItemIcon><HomeIcon /></ListItemIcon>
           <ListItemText primary='Etusivu' />
         </MenuItem>
-        <MenuItem onClick={ handleClose } component={ Link } to='/kysymys'>
-          <ListItemIcon><ListIcon /></ListItemIcon>
-          <ListItemText primary='Kysymykset' />
-        </MenuItem>
-        <MenuItem onClick={ handleClose } component={ Link } to='/lisaakysely'>
-          <ListItemIcon><ListIcon /></ListItemIcon>
-          <ListItemText primary='Lisää kysely' />
-        </MenuItem>
         <MenuItem onClick={ handleClose } component={ Link } to='/valitsekysely'>
-          <ListItemIcon><ListIcon /></ListItemIcon>
+          <ListItemIcon><KeyboardArrowRightIcon /></ListItemIcon>
           <ListItemText primary='Valitse kysely' />
         </MenuItem>
         

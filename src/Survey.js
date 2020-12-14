@@ -4,7 +4,6 @@ import RadioQuestion from './RadioQuestion.js';
 import OpenQuestion from './OpenQuestion.js';
 import CheckBoxQuestion from './CheckboxQuestion.js';
 import SliderQuestion from './SliderQuestion.js';
-import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import {
     useParams
@@ -20,10 +19,6 @@ function Survey () {
 
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/' + id;
-    const localTargetUrl = 'http://localhost:8080/surveys/' + id;
-    const answerUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/answers';
-    const localUrl = 'http://localhost:8080/answers';
-    const localUrlToSendAnswers = 'http://localhost:8080/anssurs';
     const urlToSendAnswers = 'https://ohjelmistoprojekti1backend.herokuapp.com/anssurs';
     
 

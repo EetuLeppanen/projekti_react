@@ -3,13 +3,10 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue, green,} from '@material-ui/core/colors/';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-
-import QuestionSelect from './QuestionSelect';
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
-import FetchQuestions from './FetchQuestions';
 
-import SurveyForm from './SurveyForm';
+
 import PickSurvey from './PickSurvey';
 
 
@@ -24,7 +21,7 @@ const theme = createMuiTheme({
             contrastText: '#FFFFFF'},
 
         secondary: {
-            main: '#f4d4f4', 
+            main: '#1F19C7', 
             contrastText: '#FFFFFF'},
 
         text: {
@@ -70,10 +67,6 @@ function ProjektiApp () {
             <MenuMUI/>
             <Switch>
                 <Route exact path='/' component={ EtuSivu} />
-                <Route path='/kysymys' component= { QuestionSelect } />
-
-                <Route path='/kysymykset' component= { FetchQuestions } />
-                <Route path='/lisaakysely' component= {SurveyForm } />
                 <Route path='/valitsekysely' component= {PickSurvey } />
                 <Route path="/surveys/:id" component= {Survey } />
 

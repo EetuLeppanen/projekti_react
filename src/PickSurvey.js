@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RadioQuestion from "./RadioQuestion.js";
-import FormControl from "@material-ui/core/FormControl";
+
 import Button from "@material-ui/core/Button";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,14 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
-import Survey from './Survey';
 import { useHistory } from 'react-router-dom';
 
 export default function PickSurvey() {
@@ -59,7 +50,7 @@ export default function PickSurvey() {
                     {row.title}
                   </TableCell>
                   <TableCell>
-                  <Button href={"/surveys/" + row.surveyId}>Vastaa</Button>
+                  <Button variant="contained" color="secondary" href={"/surveys/" + row.surveyId}>Vastaa</Button>
                   </TableCell>
 
                 </TableRow>
