@@ -45,6 +45,14 @@ function MenuMUI () {
           <ListItemIcon><ListIcon /></ListItemIcon>
           <ListItemText primary='Kysymykset' />
         </MenuItem>
+        <MenuItem onClick={ handleClose } component={ Link } to='/lisaakysely'>
+          <ListItemIcon><ListIcon /></ListItemIcon>
+          <ListItemText primary='Lisää kysely' />
+        </MenuItem>
+        <MenuItem onClick={ handleClose } component={ Link } to='/valitsekysely'>
+          <ListItemIcon><ListIcon /></ListItemIcon>
+          <ListItemText primary='Valitse kysely' />
+        </MenuItem>
         
         
         

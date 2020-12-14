@@ -1,19 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import RadioQuestion from './RadioQuestion.js';
+import OpenQuestion from './OpenQuestion.js';
+import CheckBoxQuestion from './CheckboxQuestion.js';
+import SliderQuestion from './SliderQuestion.js';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import {
+    useParams
+  } from "react-router-dom";
 
 function Survey () {
+
+    let {id} = useParams();
+    
+    const [vastauslista, setVastauslista] = useState([]);
     
     const [survey, setSurvey] = useState('');
-    const [value, setValue] = useState('');
-    const [answers, setAnswers] = useState([]);
+
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/1';
-    const answerUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/api/answers';
+    const targetUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/surveys/' + id;
+    const localTargetUrl = 'http://localhost:8080/surveys/' + id;
+    const answerUrl = 'https://ohjelmistoprojekti1backend.herokuapp.com/answers';
     const localUrl = 'http://localhost:8080/answers';
-
-
+    const localUrlToSendAnswers = 'http://localhost:8080/anssurs';
+    const urlToSendAnswers = 'https://ohjelmistoprojekti1backend.herokuapp.com/anssurs';
+    
     useEffect(() => {
         fetch(proxyUrl + targetUrl)
         .then(response => response.json())
@@ -21,55 +32,112 @@ function Survey () {
         .catch(error => console.error(error))
     }, []);
 
-    const handleValueChange = (event) => {
-        setValue(event.target.value);
-        console.log(event.target.value);
-        addValueToAnswers(event.target.value);
-        console.log(answers);
+    const handleValueChange =  (index, answer) => {
+        vastauslista[index] = answer;
+        
       };
 
-      const addValueToAnswers = (event) => {
-          setAnswers([...answers, event]);
+        
+        const checkAnswers = () => {
+            console.log(vastauslista);
+        }
+
+        const onValueChange = (event) => {
+        var list = vastauslista.filter(item => item.questionId !== parseInt(event.target.id));
+        if(event.target.value !== "") {
+            var answer = {questionId: parseInt(event.target.id), value: event.target.value};
+            list.push(answer);
+        }
+        setVastauslista(list);
+    }
+
+    
+
+    const sliderOnValueChange = (questionId, value) => {
+        var answer = {questionId: parseInt(questionId), value: value};
+        var list = vastauslista.filter(item => item.questionId !== parseInt(questionId));
+        list.push(answer);
+        setVastauslista(list);
+    }
+
+    const checkboxOnValueChange = (questionId, answerlist) => {
+        var list = vastauslista.filter(item => item.questionId !== parseInt(questionId));
+        answerlist.forEach(element => {
+            list.push(element);
+        });
+        setVastauslista(list);
+
+    }
+    
+    
+    const checkasd =(event) => {
+        console.log(vastauslista);
+        
       }
 
-
-      const handleSubmit = () => {
-          console.log({value});
-          answers.map((asd) =>{
-              sendAnswers(asd);
-
-          })
+      const asdf = () => {
+          console.log(survey);
       }
 
+      const sendAnswersToBackend = (event) => {
+          event.preventDefault();
+          var answeredsurvey = {surveyId: survey.surveyId, answers: vastauslista}
+          console.log(answeredsurvey);
 
-      const sendAnswers = (event) => {
-          fetch((proxyUrl + answerUrl),{
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(event)
+          fetch((urlToSendAnswers),{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(answeredsurvey)
 
-          })
-          .then(response => console.log(response))
-          .catch(error => console.error(error))
-
+        })
+        .then(response => response.json())
+        .then(answer=> console.log(answer))
+        .catch(error => console.error(error))
       }
+
 
 
 
       if(survey) {
         return(
-        
-            <FormControl>
-               
-                {survey.questions.map((question, index) =>
-                <RadioQuestion key={index} question={question} value={value} handleValueChange={handleValueChange}/>
-                )}
-                <Button onClick={() => handleSubmit()}>
+            <div>
+                <Button onClick={checkAnswers}>tarkista</Button>
+                <Button onClick={asdf}>näytä survey</Button>
+                <Button onClick={checkasd}>näytä vastaukset</Button>
+               <div>Otsikko: {survey.title}</div><br/>
+               <div>Kyselyn ID: {id}</div><br/>
+            <form onSubmit={sendAnswersToBackend}>
+                {survey.questions.map((question, index) => {
+                
+                if(question.questiontype === "RADIO"){
+
+                    return <RadioQuestion key={index} index={index} question={question} onValueChange={onValueChange} handleValueChange={handleValueChange}/>
+
+                } else if(question.questiontype === "OPENTEXT") {
+                    
+                    return <OpenQuestion key={index} index={index} question={question} onValueChange={onValueChange} handleValueChange={handleValueChange}/>
+
+                } else if(question.questiontype === "CHECKBOX") {
+                    
+                    return <CheckBoxQuestion key={index} index={index} question={question} checkboxOnValueChange={checkboxOnValueChange}/>
+
+                } else if(question.questiontype === "SCALE") {
+                    return <SliderQuestion key={index} index={index} question={question} sliderOnValueChange={sliderOnValueChange}/>
+                } else {
+                    return (<div>hello</div>)
+                }
+                    
+                
+                
+                
+                })}
+                <Button type="submit">
                     submit
                 </Button>
-            </FormControl>
+            </form>
+            </div>
 )
       } else
         return(

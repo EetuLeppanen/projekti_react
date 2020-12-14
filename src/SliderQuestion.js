@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -45,16 +45,22 @@ function valuetext(value) {
 function SliderQuestion(props) {
   const classes = useStyles();
 
+
+  const handleChange = (event, value) => {
+    props.sliderOnValueChange(props.question.questionid, value.toString());
+  }
+
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-custom" gutterBottom>
-        joonaksen auto hienous lvl
+        {props.question.title}
       </Typography>
       <Slider
-        defaultValue={50}
+        onChangeCommitted={handleChange}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider-custom"
         step={1}
+        defaultValue={1}
         min={1}
         max={5}
         marks={marks}

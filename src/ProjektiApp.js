@@ -8,7 +8,9 @@ import QuestionSelect from './QuestionSelect';
 import MenuMUI from './navigationMUI/MenuMUI';
 import EtuSivu from './EtuSivu';
 import FetchQuestions from './FetchQuestions';
-
+import SurveyForm from './SurveyForm';
+import PickSurvey from './PickSurvey';
+import Survey from './Survey';
 
 
 
@@ -52,6 +54,9 @@ function ProjektiApp () {
                 <Route exact path='/' component={ EtuSivu} />
                 <Route path='/kysymys' component= { QuestionSelect } />
                 <Route path='/kysymykset' component= { FetchQuestions } />
+                <Route path='/lisaakysely' component= {SurveyForm } />
+                <Route path='/valitsekysely' component= {PickSurvey } />
+                <Route path="/surveys/:id" component= {Survey } />
             </Switch>
 
             
