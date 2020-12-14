@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import RadioQuestion from './RadioQuestion.js';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 import OpenQuestion from './OpenQuestion.js';
 import CheckBoxQuestion from './CheckboxQuestion.js';
 import SliderQuestion from './SliderQuestion.js';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
-import {
-    useParams
-  } from "react-router-dom";
+import {useParams} from "react-router-dom";
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,11 +20,30 @@ import {
         margin: '10px',
         paddingBottom: '15px',
         width: '25ch',
-      },
-    },
+      }},
+      h1: {
+          color: '#1F19C7'
+      }
+    
   }));
 
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+
 function Survey () {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+
+      
     const classes = useStyles();
 
     let {id} = useParams();
@@ -81,7 +103,7 @@ function Survey () {
     
    
       const sendAnswersToBackend = (event) => {
-          event.preventDefault();
+          
           var answeredsurvey = {surveyId: survey.surveyId, answers: vastauslista}
           console.log(answeredsurvey);
 
@@ -105,7 +127,7 @@ function Survey () {
         return(
             <div>
                
-               <div><h1> {survey.title}</h1></div>
+              <div> <h1 className={classes.h1}> {survey.title}</h1></div>
                <div><b>Kyselyn tunnus: {id}</b></div><br/>
             <form className={classes.root} onSubmit={sendAnswersToBackend}>
                 {survey.questions.map((question, index) => {
@@ -132,9 +154,32 @@ function Survey () {
                 
                 
                 })}
-                <Button variant="contained" color="secondary" type="submit">
-                    submit
-                </Button>
+               <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+        Lähetä
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Lähetetäänkö vastaus?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Vakuutan antamani tiedot oikeiksi.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Peruuta
+          </Button>
+          <Button onClick={() => { handleClose(); sendAnswersToBackend();}} type="submit" color="secondary" > 
+           Hyväksy
+          </Button>
+        </DialogActions>
+      </Dialog>
             </form>
             </div>
 

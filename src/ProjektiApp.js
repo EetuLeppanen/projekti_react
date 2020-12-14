@@ -40,9 +40,10 @@ const theme = createMuiTheme({
         },
     typography: 
         { fontFamily: 
-            ['Muli'], 
+            ['Aleo'], 
             fontSize: 24
         },
+    
         
     overrides: {
         MuiCssBaseline: {
