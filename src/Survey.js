@@ -101,9 +101,7 @@ function Survey () {
       if(survey) {
         return(
             <div>
-                <Button onClick={checkAnswers}>tarkista</Button>
-                <Button onClick={asdf}>näytä survey</Button>
-                <Button onClick={checkasd}>näytä vastaukset</Button>
+               
                <div>Otsikko: {survey.title}</div><br/>
                <div>Kyselyn ID: {id}</div><br/>
             <form onSubmit={sendAnswersToBackend}>
