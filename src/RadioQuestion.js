@@ -19,7 +19,7 @@ function RadioQuestion(props) {
         <FormControlLabel
           key={index}
           value={option.value}
-          control={<Radio id={props.question.questionid} />}
+          control={<Radio id={props.question.questionId} />}
           label={option.value}
         />
       ))}

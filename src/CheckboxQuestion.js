@@ -25,14 +25,14 @@ export default function CheckboxesGroup(props) {
   const upDateList = (e) => {
     if(e.target.checked === true) {
       var list = state.filter(item => item.value !== e.target.value);
-    var ans = {questionId: props.question.questionid, value: e.target.value};
+    var ans = {questionId: props.question.questionId, value: e.target.value};
     list.push(ans);
     setState(list);
-    props.checkboxOnValueChange(props.question.questionid, list);
+    props.checkboxOnValueChange(props.question.questionId, list);
     } else {
       var list = state.filter(item => item.value !== e.target.value);
     setState(list);
-    props.checkboxOnValueChange(props.question.questionid, list);
+    props.checkboxOnValueChange(props.question.questionId, list);
     }
 
   }
@@ -50,7 +50,7 @@ export default function CheckboxesGroup(props) {
             <FormControlLabel
               key={index}
               value={option.value}
-              questionid={props.question.questionid}
+              questionId={props.question.questionId}
               control={<Checkbox />}
               onChange={upDateList}
               label={option.value}

@@ -47,7 +47,7 @@ function SliderQuestion(props) {
 
 
   const handleChange = (event, value) => {
-    props.sliderOnValueChange(props.question.questionid, value.toString());
+    props.sliderOnValueChange(props.question.questionId, value.toString());
   }
 
   return (

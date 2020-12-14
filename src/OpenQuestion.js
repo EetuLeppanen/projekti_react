@@ -11,7 +11,7 @@ function OpenQuestion(props) {
       <FormLabel component="legend">{props.question.title}</FormLabel>
       <TextField
         onChange={props.onValueChange}
-        id={props.question.questionid}/>
+        id={props.question.questionId}/>
     </FormControl>
   );
 }
