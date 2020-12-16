@@ -30,7 +30,7 @@ export default function CheckboxesGroup(props) {
     setState(list);
     props.checkboxOnValueChange(props.question.questionId, list);
     } else {
-      var list = state.filter(item => item.value !== e.target.value);
+      
     setState(list);
     props.checkboxOnValueChange(props.question.questionId, list);
     }
